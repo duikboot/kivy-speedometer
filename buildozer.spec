@@ -41,7 +41,7 @@ requirements = kivy, plyer
 presplash.filename = %(source.dir)s/data/uboot.jpg
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/uboot.jpg
+icon.filename = %(source.dir)s/data/uboot.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = all
