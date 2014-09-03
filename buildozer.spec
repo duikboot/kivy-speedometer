@@ -1,13 +1,13 @@
 [app]
 
 # (str) Title of your application
-title = Python Accelerometer
+title = Python Speedometer
 
 # (str) Package name
-package.name = accelerometer
+package.name = speedometer
 
 # (str) Package domain (needed for android/ios packaging)
-package.domain = nl.arjen-dijkstra
+package.domain = org.duikboot
 
 # (str) Source code where the main.py live
 source.dir = .
@@ -25,11 +25,11 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version.regex = __version__ = ['"](.*)'['"]
-version.filename = %(source.dir)s/main.py
+/* version.regex = __version__ = ['"](.*)'['"] */
+/* version.filename = %(source.dir)s/main.py */
 
 # (str) Application versioning (method 2)
-# version = 1.2.0
+version = 0.1.1
 
 # (list) Application requirements
 requirements = kivy, plyer
@@ -38,16 +38,16 @@ requirements = kivy, plyer
 #garden_requirements =
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/data/presplash.png
+presplash.filename = %(source.dir)s/data/uboot.jpg
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/data/icon.png
+#icon.filename = %(source.dir)s/data/uboot.jpg
 
 # (str) Supported orientation (one of landscape, portrait or all)
-orientation = landscape
+orientation = all
 
 # (bool) Indicate if the application should be fullscreen or not
-fullscreen = 1
+fullscreen = 0
 
 
 #
@@ -55,7 +55,7 @@ fullscreen = 1
 #
 
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION
 
 # (int) Android API to use
 #android.api = 14

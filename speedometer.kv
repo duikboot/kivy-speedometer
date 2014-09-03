@@ -1,0 +1,23 @@
+#:kivy 1.8.0
+
+<Root>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            text: app.gps_speed
+
+        Label:
+            text: app.highest_speed
+
+        Label:
+            text: app.gps_status
+
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            padding: '4dp'
+
+            ToggleButton:
+                text: 'Start' if self.state == 'normal' else 'Stop'
+                on_state: app.gps_start() if self.state == 'down' else app.gps_stop()

@@ -11,3 +11,5 @@ tags
 *.o
 *.orig
 .hsenv*
+.buildozer
+bin/
