@@ -1,0 +1,9 @@
+Cython
+hg+http://bitbucket.org/pygame/pygame
+Kivy
+Pillow
+buildozer
+certifi
+plyer
+requests
+wsgiref
