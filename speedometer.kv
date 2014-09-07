@@ -13,6 +13,7 @@
         Label:
             text: app.gps_status
 
+
         BoxLayout:
             size_hint_y: None
             height: '48dp'
@@ -21,3 +22,9 @@
             ToggleButton:
                 text: 'Start' if self.state == 'normal' else 'Stop'
                 on_state: app.gps_start() if self.state == 'down' else app.gps_stop()
+            Button:
+                text: 'Reset highest speed'
+                on_release: app.reset_highest_speed()
+            Button:
+                text: 'open the settings'
+                on_release: app.open_settings()

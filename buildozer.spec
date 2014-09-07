@@ -25,8 +25,8 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-/* version.regex = __version__ = ['"](.*)'['"] */
-/* version.filename = %(source.dir)s/main.py */
+# version.regex = __version__ = ['"](.*)'['"] */
+# version.filename = %(source.dir)s/main.py */
 
 # (str) Application versioning (method 2)
 version = 0.1.1
@@ -55,7 +55,7 @@ fullscreen = 0
 #
 
 # (list) Permissions
-android.permissions = INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION
+android.permissions = INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, WAKE_LOCK
 
 # (int) Android API to use
 #android.api = 14
@@ -119,7 +119,7 @@ android.permissions = INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION
 
 # (bool) Indicate whether the screen should stay on
 # Don't forget to add the WAKE_LOCK permission if you set this to True
-#android.wakelock = False
+android.wakelock = True
 
 # (list) Android application meta-data to set (key=value format)
 #android.meta_data =
