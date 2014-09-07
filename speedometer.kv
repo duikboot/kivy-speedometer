@@ -1,17 +1,20 @@
 #:kivy 1.8.0
 
+<StaticBoxLayout@BoxLayout>:
+    orientation: 'vertical'
+
+    Label:
+        text: app.gps_speed
+
+    Label:
+        text: app.highest_speed
+
+    Label:
+        text: app.gps_status
+
 <Root>:
-    BoxLayout:
-        orientation: 'vertical'
 
-        Label:
-            text: app.gps_speed
-
-        Label:
-            text: app.highest_speed
-
-        Label:
-            text: app.gps_status
+    StaticBoxLayout:
 
         BoxLayout:
             size_hint_y: None
@@ -27,7 +30,7 @@
             height: '48dp'
 
             Button:
-                text: 'Reset highest speed'
+                text: 'Reset'
                 on_release: app.reset_highest_speed()
 
             Button:

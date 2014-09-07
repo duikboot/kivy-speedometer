@@ -27,9 +27,7 @@ class Speedometer(App):
             self.highest_speed_float)
 
     def build_config(self, config):
-        config.setdefaults('preferences',
-                           {'unit': 'km/h',
-                            })
+        config.setdefaults('preferences', {'unit': 'km/h'})
 
     def build_settings(self, settings):
         settings.add_json_panel('Speed preferences',
@@ -48,12 +46,12 @@ class Speedometer(App):
         try:
             self.gps_root.configure(on_location=self.on_location,
                                     on_status=self.on_status)
+            return Root()
         except NotImplementedError:
             popup = Popup(title="GPS Error",
                           content=Label(
                               text="GPS not configured...")).open()
             Clock.schedule_once(lambda d: popup.dismiss(), 3)
-        return Root()
 
     @mainthread
     def on_location(self, **kwargs):
