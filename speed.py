@@ -4,9 +4,9 @@ class Speed(object):
         self._ms = ms
 
     @classmethod
-    def from_mh(cls, mh):
-        ms = mh / (1609.44/3600)
-        return cls(mh)
+    def from_mh(cls, mph):
+        ms = mph / (1609.44/3600)
+        return cls(mph)
 
     @classmethod
     def from_kmh(cls, kmh):
@@ -18,15 +18,15 @@ class Speed(object):
         return kmh
 
     def _to_mh(self):
-        mh = self._ms * 2.2369
-        return mh
+        mph = self._ms * 2.2369
+        return mph
 
     @property
     def kmh(self):
         return self._to_kmh()
 
     @property
-    def mh(self):
+    def mph(self):
         return self._to_mh()
 
     @property

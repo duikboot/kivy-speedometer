@@ -1,7 +1,7 @@
 [app]
 
 # (str) Title of your application
-title = Python Speedometer
+title = Duikboot's Speedometer
 
 # (str) Package name
 package.name = speedometer
@@ -55,7 +55,7 @@ fullscreen = 0
 #
 
 # (list) Permissions
-android.permissions = INTERNET, ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, WAKE_LOCK
+android.permissions = ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, WAKE_LOCK
 
 # (int) Android API to use
 #android.api = 14
