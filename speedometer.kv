@@ -10,14 +10,21 @@
         size_hint_y: 40
         text: "{:.2f}".format(app.gps_speed)
         font_size: self.height / 3
+        color: 1,0,0,1
 
     Label:
         size_hint_y: 10
         text: "Highest speed:"
+
     Label:
         size_hint_y: 40
         text: "{:.2f}".format(app.highest_speed)
         font_size: self.height / 3
+        color: 1,0,0,1
+
+    Label:
+        size_hint_y: 10
+        text: 'Gps status:'
 
     Label:
         size_hint_y: 10

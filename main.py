@@ -36,6 +36,7 @@ class Speedometer(App):
                                 data=settings_json)
 
     def gps_start(self):
+        self.gps_status = 'Loading gps status'
         self.gps_root.start()
 
     def gps_stop(self):
@@ -54,6 +55,7 @@ class Speedometer(App):
                           content=Label(
                               text="GPS not configured...")).open()
             Clock.schedule_once(lambda d: popup.dismiss(), 3)
+            return Root()
 
     @mainthread
     def on_location(self, **kwargs):
