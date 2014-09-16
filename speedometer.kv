@@ -4,13 +4,24 @@
     orientation: 'vertical'
 
     Label:
-        text: app.gps_speed
+        size_hint_y: 10
+        text: "Speed:"
+    Label:
+        size_hint_y: 40
+        text: "{:.2f}".format(app.gps_speed)
+        font_size: self.height / 3
 
     Label:
-        text: app.highest_speed
+        size_hint_y: 10
+        text: "Highest speed:"
+    Label:
+        size_hint_y: 40
+        text: "{:.2f}".format(app.highest_speed)
+        font_size: self.height / 3
 
     Label:
-        text: app.gps_status
+        size_hint_y: 10
+        text: app.gps_status if app.gps_status else 'Click Start to get GPS speed updates'
 
 <Root>:
 

@@ -13,3 +13,5 @@ tags
 .hsenv*
 .buildozer
 bin/
+Session.vim
+*.ini

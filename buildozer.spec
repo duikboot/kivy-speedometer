@@ -16,20 +16,20 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 
 # (list) Source files to exclude (let empty to not exclude anything)
-source.exclude_exts = bin,ENV
+source.exclude_exts = spec,pyc,txt,ini,vim
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin
+source.exclude_dirs = tests,bin,ENV,env
 
 # (list) List of exclusions using pattern matching
-#source.exclude_patterns = license,images/*/*.jpg
+source.exclude_patterns = license,images/*/*.jpg,tags
 
 # (str) Application versioning (method 1)
 # version.regex = __version__ = ['"](.*)'['"]
 # version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 0.3.3
+version = 0.3.5
 
 # (list) Application requirements
 requirements = kivy, plyer

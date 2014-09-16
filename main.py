@@ -6,7 +6,7 @@ from kivy.app import App
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.floatlayout import FloatLayout
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, NumericProperty
 from kivy.clock import Clock, mainthread
 from plyer import gps
 
@@ -20,15 +20,12 @@ class Root(FloatLayout):
 
 class Speedometer(App):
 
-    gps_speed = StringProperty("Speed...")
-    highest_speed = StringProperty("Highest speed")
-    gps_status = StringProperty('Click Start to get GPS speed updates')
-    highest_speed_float = 0.0
+    gps_speed = NumericProperty(0.0)
+    highest_speed = NumericProperty(0.0)
+    gps_status = StringProperty()
 
     def reset_highest_speed(self):
-        self.highest_speed_float = 0.0
-        self.highest_speed = "Highest speed: \n{:.2f} km/h".format(
-            self.highest_speed_float)
+        self.highest_speed = 0.00
 
     def build_config(self, config):
         config.setdefaults('preferences', {'unit': 'km/h'})
@@ -42,6 +39,7 @@ class Speedometer(App):
         self.gps_root.start()
 
     def gps_stop(self):
+        self.gps_status = ''
         self.gps_root.stop()
 
     def build(self):
@@ -59,12 +57,9 @@ class Speedometer(App):
 
     @mainthread
     def on_location(self, **kwargs):
-        speed = Speed(float(kwargs['speed'])).kmh
-        if speed > self.highest_speed_float:
-            self.highest_speed_float = speed
-        self.gps_speed = "Speed: \n{:.2f} km/h".format(speed)
-        self.highest_speed = "Highest speed: \n{:.2f} km/h".format(
-            self.highest_speed_float)
+        self.gps_speed = Speed(float(kwargs['speed'])).kmh
+        if self.gps_speed > self.highest_speed:
+            self.highest_speed = self.gps_speed
 
     @mainthread
     def on_status(self, stype, status):
