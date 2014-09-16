@@ -1,3 +1,7 @@
+"""
+Main module of the Speedometer app.
+"""
+
 from kivy.app import App
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
@@ -67,6 +71,7 @@ class Speedometer(App):
         self.gps_status = 'type={}\n{}'.format(stype, status)
 
     def on_pause(self):
+        self.gps_stop()
         return True
 
 if __name__ == '__main__':
