@@ -1,4 +1,4 @@
-class Speed(object):
+class Speed(float):
 
     def __init__(self, meters_per_second):
         self._meters_per_second = meters_per_second

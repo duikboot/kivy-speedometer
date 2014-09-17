@@ -14,18 +14,20 @@ from speed import Speed
 from settingsjson import settings_json
 
 
-class Root(FloatLayout):
+class RootLayout(FloatLayout):
     pass
 
 
-class Speedometer(App):
+class SpeedometerApp(App):
 
     gps_speed = NumericProperty(0.0)
     highest_speed = NumericProperty(0.0)
     gps_status = StringProperty()
+    highest_speed_float = 0.00
 
     def reset_highest_speed(self):
         self.highest_speed = 0.00
+        self.highest_speed_float = 0.00
 
     def build_config(self, config):
         config.setdefaults('preferences', {'unit': 'km/h'})
@@ -49,19 +51,20 @@ class Speedometer(App):
         try:
             self.gps_root.configure(on_location=self.on_location,
                                     on_status=self.on_status)
-            return Root()
+            return RootLayout()
         except NotImplementedError:
             popup = Popup(title="GPS Error",
                           content=Label(
                               text="GPS not configured...")).open()
             Clock.schedule_once(lambda d: popup.dismiss(), 3)
-            return Root()
 
     @mainthread
     def on_location(self, **kwargs):
-        self.gps_speed = Speed(float(kwargs['speed'])).kmh
-        if self.gps_speed > self.highest_speed:
-            self.highest_speed = self.gps_speed
+        speed = Speed(float(kwargs['speed']))
+        if speed > self.highest_speed_float:
+            self.highest_speed_float = speed
+        self.gps_speed = speed.kmh
+        self.highest_speed = Speed(self.highest_speed_float).kmh
 
     @mainthread
     def on_status(self, stype, status):
@@ -72,4 +75,4 @@ class Speedometer(App):
         return True
 
 if __name__ == '__main__':
-    Speedometer().run()
+    SpeedometerApp().run()
