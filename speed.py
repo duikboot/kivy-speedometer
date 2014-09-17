@@ -1,7 +1,16 @@
+class SpeedError(Exception):
+
+    """Speed intialize exception"""
+
+
 class Speed(float):
 
-    def __init__(self, meters_per_second):
-        self._meters_per_second = meters_per_second
+    def __new__(cls, *args, **kwargs):
+        try:
+            # return float.__new__(cls, *args, **kwargs)
+            return super(Speed, cls).__new__(cls, *args, **kwargs)
+        except(TypeError, ValueError):
+            raise SpeedError("No way")
 
     @classmethod
     def from_mh(cls, mph):
@@ -14,11 +23,11 @@ class Speed(float):
         return cls(meters_per_second)
 
     def _to_kmh(self):
-        kmh = self._meters_per_second * (18/5.0)
+        kmh = self * (18/5.0)
         return kmh
 
     def _to_mh(self):
-        mph = self._meters_per_second * 2.2369
+        mph = self * 2.2369
         return mph
 
     @property
@@ -31,4 +40,4 @@ class Speed(float):
 
     @property
     def meters_per_second(self):
-        return self._meters_per_second
+        return self
