@@ -16,6 +16,11 @@ class Speed(float):
     Properties (readonly):
     kph, mph, mps
 
+    >>> null = Speed()
+    >>> print "{:.2f}".format(null)
+    0.00
+    >>> print null.kph, null.mph
+    0.0 0.0
     >>> kph = Speed.from_kph(30)
     >>> print "{:.2f}".format(kph)
     8.33
