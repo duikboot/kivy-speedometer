@@ -5,6 +5,26 @@ class SpeedError(Exception):
 
 class Speed(float):
 
+    """Speed type.
+
+    Constructors:
+
+    __new__()
+    from_kph()
+    from_mph()
+
+    Properties (readonly):
+    kph, mph, mps
+
+    >>> kph = Speed.from_kph(30)
+    >>> print "{:.2f}".format(kph)
+    8.33
+    >>> print "{:.2f}".format(kph.kph)
+    30.00
+    >>> print "{:.2f}".format(kph.mph)
+    18.64
+    """
+
     def __new__(cls, *args, **kwargs):
         try:
             # return float.__new__(cls, *args, **kwargs)
@@ -13,31 +33,38 @@ class Speed(float):
             raise SpeedError("No way")
 
     @classmethod
-    def from_mh(cls, mph):
-        meters_per_second = mph / (1609.44/3600)
-        return cls(meters_per_second)
+    def from_mph(cls, mph):
+        """Construct speed from miles/hour."""
+        mps = mph * 0.44704
+        return cls(mps)
 
     @classmethod
-    def from_kmh(cls, kmh):
-        meters_per_second = kmh * (5/18.0)
-        return cls(meters_per_second)
+    def from_kph(cls, kph):
+        """Construct speed from kilometer/hour."""
+        mps = kph * (5/18.0)
+        return cls(mps)
 
-    def _to_kmh(self):
-        kmh = self * (18/5.0)
-        return kmh
+    def _to_kph(self):
+        kph = self * (18/5.0)
+        return kph
 
-    def _to_mh(self):
+    def _to_mph(self):
         mph = self * 2.2369
         return mph
 
     @property
-    def kmh(self):
-        return self._to_kmh()
+    def kph(self):
+        return self._to_kph()
 
     @property
     def mph(self):
-        return self._to_mh()
+        return self._to_mph()
 
     @property
-    def meters_per_second(self):
+    def mps(self):
         return self
+
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()

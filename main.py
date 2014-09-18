@@ -63,8 +63,8 @@ class SpeedometerApp(App):
         speed = Speed(float(kwargs['speed']))
         if speed > self.highest_speed_float:
             self.highest_speed_float = speed
-        self.gps_speed = speed.kmh
-        self.highest_speed = Speed(self.highest_speed_float).kmh
+        self.gps_speed = speed.kph
+        self.highest_speed = Speed(self.highest_speed_float).kph
 
     @mainthread
     def on_status(self, stype, status):
