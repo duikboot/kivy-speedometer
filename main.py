@@ -3,11 +3,11 @@ Main module of the Speedometer app.
 """
 
 from kivy.app import App
-from kivy.uix.popup import Popup
-from kivy.uix.label import Label
-from kivy.uix.floatlayout import FloatLayout
-from kivy.properties import StringProperty, NumericProperty
 from kivy.clock import Clock, mainthread
+from kivy.properties import StringProperty, NumericProperty
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 from plyer import gps
 
 from speed import Speed
