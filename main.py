@@ -27,6 +27,7 @@ class SpeedometerApp(App):
     highest_speed = NumericProperty(0.0)
     gps_status = StringProperty()
     highest_speed_float = 0.00
+    unit = StringProperty()
 
     def reset_highest_speed(self):
         self.highest_speed = 0.00
@@ -65,6 +66,9 @@ class SpeedometerApp(App):
                               text="GPS not configured...")).open()
             Clock.schedule_once(lambda d: popup.dismiss(), 3)
         return RootLayout()
+
+    def get_unit(self):
+        return unit_mapping[self.unit]
 
     @mainthread
     def on_location(self, **kwargs):
