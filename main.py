@@ -43,6 +43,8 @@ class SpeedometerApp(App):
 
     def on_config_change(self, config, section, key, value):
         self.unit = config.get('preferences', 'unit')
+        self.highest_speed = getattr(Speed(self.highest_speed_float),
+                                     unit_mapping[self.unit])
 
     def gps_start(self):
         self.gps_status = 'Loading gps status'
