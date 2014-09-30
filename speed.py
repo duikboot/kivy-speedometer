@@ -19,9 +19,17 @@ class Speed(float):
     >>> null = Speed()
     >>> print "{:.2f}".format(null)
     0.00
-    >>> print null.kph, null.mph
-    0.0 0.0
+    >>> print null.kph, null.mph, null.mps
+    0.0 0.0 0.0
     >>> kph = Speed.from_kph(30)
+    >>> print "{:.2f}".format(kph)
+    8.33
+    >>> print "{:.2f}".format(kph.kph)
+    30.00
+    >>> print "{:.2f}".format(kph.mph)
+    18.64
+    >>> print "{:.2f}".format(kph.mps)
+    8.33
     >>> print "{:.2f}".format(kph)
     8.33
     >>> print "{:.2f}".format(kph.kph)
@@ -67,7 +75,7 @@ class Speed(float):
 
     @property
     def mps(self):
-        return self
+        return float(self)
 
 
 if __name__ == '__main__':
