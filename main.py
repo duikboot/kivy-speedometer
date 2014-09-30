@@ -14,6 +14,9 @@ from speed import Speed
 from settingsjson import settings_json
 
 
+unit_mapping = {"km/h": "kph", "m/s": "mps", "mi/h": "mph"}
+
+
 class RootLayout(FloatLayout):
     pass
 
@@ -37,6 +40,9 @@ class SpeedometerApp(App):
                                 self.config,
                                 data=settings_json)
 
+    def on_config_change(self, config, section, key, value):
+        self.unit = config.get('preferences', 'unit')
+
     def gps_start(self):
         self.gps_status = 'Loading gps status'
         self.gps_root.start()
@@ -47,6 +53,7 @@ class SpeedometerApp(App):
 
     def build(self):
         self.use_kivy_settings = False
+        self.unit = self.config.get('preferences', 'unit')
         self.gps_root = gps
         try:
             self.gps_root.configure(on_location=self.on_location,
@@ -57,14 +64,16 @@ class SpeedometerApp(App):
                           content=Label(
                               text="GPS not configured...")).open()
             Clock.schedule_once(lambda d: popup.dismiss(), 3)
+        return RootLayout()
 
     @mainthread
     def on_location(self, **kwargs):
         speed = Speed(float(kwargs['speed']))
         if speed > self.highest_speed_float:
             self.highest_speed_float = speed
-        self.gps_speed = speed.kph
-        self.highest_speed = Speed(self.highest_speed_float).kph
+        self.gps_speed = getattr(speed, unit_mapping[self.unit])
+        self.highest_speed = getattr(Speed(self.highest_speed_float),
+                                     unit_mapping[self.unit])
 
     @mainthread
     def on_status(self, stype, status):
