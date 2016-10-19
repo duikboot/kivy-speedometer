@@ -8,7 +8,10 @@ from kivy.properties import StringProperty, NumericProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from plyer import gps
+try:
+    from plyer import gps
+except ImportError:
+    pass
 
 from speed import Speed
 from settingsjson import settings_json
@@ -49,17 +52,30 @@ class SpeedometerApp(App):
 
     def gps_start(self):
         self.gps_status = 'Loading gps status'
-        self.gps_root.start()
+        try:
+            self.gps_root.start()
+        except NotImplementedError:
+            popup = Popup(title="GPS Error",
+                          content=Label(
+                              text="GPS not configured...")).open()
+            Clock.schedule_once(lambda d: popup.dismiss(), 3)
 
     def gps_stop(self):
         self.gps_status = ''
-        self.gps_root.stop()
+        try:
+            self.gps_root.stop()
+
+        except NotImplementedError:
+            popup = Popup(title="GPS Error",
+                          content=Label(
+                              text="GPS not configured...")).open()
+            Clock.schedule_once(lambda d: popup.dismiss(), 3)
 
     def build(self):
         self.use_kivy_settings = False
         self.unit = self.config.get('preferences', 'unit')
-        self.gps_root = gps
         try:
+            self.gps_root = gps
             self.gps_root.configure(on_location=self.on_location,
                                     on_status=self.on_status)
             return RootLayout()

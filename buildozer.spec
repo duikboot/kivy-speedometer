@@ -15,6 +15,9 @@ source.dir = .
 # (list) Source files to include (let empty to include all the files)
 source.include_exts = py,png,jpg,kv,atlas
 
+# (list) List of inclusions using pattern matching
+#source.include_patterns = assets/*,images/*.png
+
 # (list) Source files to exclude (let empty to not exclude anything)
 source.exclude_exts = spec,pyc,txt,ini,vim
 
@@ -29,7 +32,7 @@ source.exclude_patterns = license,images/*/*.jpg,tags
 # version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 0.3.5
+version = 0.3.6
 
 # (list) Application requirements
 requirements = kivy, plyer
@@ -46,25 +49,32 @@ icon.filename = %(source.dir)s/data/uboot.png
 # (str) Supported orientation (one of landscape, portrait or all)
 orientation = all
 
-# (bool) Indicate if the application should be fullscreen or not
-fullscreen = 0
 
+#
+# OSX Specific
+#
+
+#
+# author = © Copyright Info
 
 #
 # Android specific
 #
 
+# (bool) Indicate if the application should be fullscreen or not
+fullscreen = 1
+
 # (list) Permissions
 android.permissions = ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, WAKE_LOCK
 
 # (int) Android API to use
-#android.api = 14
+#android.api = 19
 
-# (int) Minimum API required (8 = Android 2.2 devices)
-#android.minapi = 8
+# (int) Minimum API required
+#android.minapi = 9
 
 # (int) Android SDK version to use
-#android.sdk = 21
+#android.sdk = 20
 
 # (str) Android NDK version to use
 #android.ndk = 9c
@@ -78,11 +88,19 @@ android.permissions = ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION, WAKE_LOCK
 # (str) Android SDK directory (if empty, it will be automatically downloaded.)
 #android.sdk_path =
 
+# (str) ANT directory (if empty, it will be automatically downloaded.)
+#android.ant_path =
+
 # (str) python-for-android git clone directory (if empty, it will be automatically cloned from github)
 #android.p4a_dir =
 
 # (list) python-for-android whitelist
 #android.p4a_whitelist =
+
+# (bool) If True, then skip trying to update the Android sdk
+# This can be useful to avoid excess Internet downloads or save time
+# when an update is due and you just want to test/build your package
+# android.skip_update = False
 
 # (str) Android entry point, default is ok for Kivy-based app
 #android.entrypoint = org.renpy.android.PythonActivity
@@ -128,9 +146,18 @@ android.wakelock = True
 # project.properties automatically.)
 #android.library_references =
 
+# (str) Android logcat filters to use
+#android.logcat_filters = *:S python:D
+
+# (bool) Copy library instead of making a libpymodules.so
+#android.copy_libs = 1
+
 #
 # iOS specific
 #
+
+# (str) Path to a custom kivy-ios folder
+#ios.kivy_ios_dir = ../kivy-ios
 
 # (str) Name of the certificate to use for signing the debug version
 # Get a list of available identities: buildozer ios list_identities
@@ -143,43 +170,51 @@ android.wakelock = True
 [buildozer]
 
 # (int) Log level (0 = error only, 1 = info, 2 = debug (with command output))
-log_level = 1
+log_level = 2
+
+# (int) Display warning if buildozer is run as root (0 = False, 1 = True)
+warn_on_root = 1
+
+# (str) Path to build artifact storage, absolute or relative to spec file
+# build_dir = ./.buildozer
+
+# (str) Path to build output (i.e. .apk, .ipa) storage
+# bin_dir = ./bin
+
+#    -----------------------------------------------------------------------------
+#    List as sections
+#
+#    You can define all the "list" as [section:key].
+#    Each line will be considered as a option to the list.
+#    Let's take [app] / source.exclude_patterns.
+#    Instead of doing:
+#
+#[app]
+#source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
+#
+#    This can be translated into:
+#
+#[app:source.exclude_patterns]
+#license
+#data/audio/*.wav
+#data/images/original/*
+#
 
 
-# -----------------------------------------------------------------------------
-# List as sections
+#    -----------------------------------------------------------------------------
+#    Profiles
 #
-# You can define all the "list" as [section:key].
-# Each line will be considered as a option to the list.
-# Let's take [app] / source.exclude_patterns.
-# Instead of doing:
+#    You can extend section / key with a profile
+#    For example, you want to deploy a demo version of your application without
+#    HD content. You could first change the title to add "(demo)" in the name
+#    and extend the excluded directories to remove the HD content.
 #
-#     [app]
-#     source.exclude_patterns = license,data/audio/*.wav,data/images/original/*
+#[app@demo]
+#title = My Application (demo)
 #
-# This can be translated into:
+#[app:source.exclude_patterns@demo]
+#images/hd/*
 #
-#     [app:source.exclude_patterns]
-#     license
-#     data/audio/*.wav
-#     data/images/original/*
+#    Then, invoke the command line with the "demo" profile:
 #
-
-
-# -----------------------------------------------------------------------------
-# Profiles
-#
-# You can extend section / key with a profile
-# For example, you want to deploy a demo version of your application without
-# HD content. You could first change the title to add "(demo)" in the name
-# and extend the excluded directories to remove the HD content.
-#
-#     [app@demo]
-#     title = My Application (demo)
-#
-#     [app:source.exclude_patterns@demo]
-#     images/hd/*
-#
-# Then, invoke the command line with the "demo" profile:
-#
-#     buildozer --profile demo android debug
+#buildozer --profile demo android debug

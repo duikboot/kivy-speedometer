@@ -1,9 +1,5 @@
-Cython
-hg+http://bitbucket.org/pygame/pygame
-Kivy
-Pillow
+Cython==0.23
 buildozer
 certifi
 plyer
 requests
-wsgiref
