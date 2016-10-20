@@ -17,24 +17,24 @@ class Speed(float):
     kph, mph, mps
 
     >>> null = Speed()
-    >>> print "{:.2f}".format(null)
+    >>> print("{:.2f}".format(null))
     0.00
-    >>> print null.kph, null.mph, null.mps
+    >>> print(null.kph, null.mph, null.mps)
     0.0 0.0 0.0
     >>> kph = Speed.from_kph(30)
-    >>> print "{:.2f}".format(kph)
+    >>> print("{:.2f}".format(kph))
     8.33
-    >>> print "{:.2f}".format(kph.kph)
+    >>> print("{:.2f}".format(kph.kph))
     30.00
-    >>> print "{:.2f}".format(kph.mph)
+    >>> print("{:.2f}".format(kph.mph))
     18.64
-    >>> print "{:.2f}".format(kph.mps)
+    >>> print("{:.2f}".format(kph.mps))
     8.33
-    >>> print "{:.2f}".format(kph)
+    >>> print("{:.2f}".format(kph))
     8.33
-    >>> print "{:.2f}".format(kph.kph)
+    >>> print("{:.2f}".format(kph.kph))
     30.00
-    >>> print "{:.2f}".format(kph.mph)
+    >>> print("{:.2f}".format(kph.mph))
     18.64
     """
 
