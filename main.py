@@ -64,12 +64,13 @@ class SpeedometerApp(App):
     def gps_start(self):
         self.gps_status = 'Loading gps status'
         try:
-            self.gps_root.start()
+            self.gps_root.start(minTime=500, minDistance=0)
         except (NotImplementedError, AttributeError):
             popup = Popup(title="GPS Error",
                           content=Label(
-                              text="GPS not configured...")).open()
-            Clock.schedule_once(lambda d: popup.dismiss(), 3)
+                              text="GPS not configured..."))
+            popup.open()
+            Clock.schedule_once(popup.dismiss, 3)
 
     def gps_stop(self):
         self.gps_status = ''
@@ -79,8 +80,9 @@ class SpeedometerApp(App):
         except (NotImplementedError, AttributeError):
             popup = Popup(title="GPS Error",
                           content=Label(
-                              text="GPS not configured...")).open()
-            Clock.schedule_once(lambda d: popup.dismiss(), 3)
+                              text="GPS not configured..."))
+            popup.open()
+            Clock.schedule_once(popup.dismiss, 3)
 
     def build(self):
         self.use_kivy_settings = False
@@ -93,8 +95,9 @@ class SpeedometerApp(App):
         except NotImplementedError:
             popup = Popup(title="GPS Error",
                           content=Label(
-                              text="GPS not configured...")).open()
-            Clock.schedule_once(lambda d: popup.dismiss(), 3)
+                              text="GPS not configured..."))
+            popup.open()
+            Clock.schedule_once(popup.dismiss, 3)
         return RootLayout()
 
     def get_unit(self):
